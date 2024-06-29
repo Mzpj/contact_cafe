@@ -76,8 +76,6 @@ html {
   .reset_btn {
     background: #e6e6e6;
   }
-  .alert {
-    color: #fff;
-    padding: 20px;
-    background: #d14539;
-  }
+  .alert_bg {
+  background: rgba(230,169,171,.5);
+}
