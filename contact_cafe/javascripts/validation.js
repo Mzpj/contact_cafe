@@ -2,7 +2,7 @@ function emailValidation() {
   const form = document.getElementById('form');
   const emailField = document.getElementById('email');
   const emailConfirmField = document.getElementById('email_confirm');
-
+  
   emailConfirmField.addEventListener('input', () => {
     if (emailField.value !== emailConfirmField.value) {
       showError();
@@ -11,38 +11,33 @@ function emailValidation() {
     }
   });
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (emailField.value !== emailConfirmField.value) {
-      showError();
-    } else {
-      form.submit();
-    }
-  });
-
   function showError() {
-    let errorElement = form.querySelector('.alert');
+    let errorElement = document.getElementById('alert');
+  
     if (!errorElement) {
       errorElement = document.createElement('p');
       errorElement.textContent = "Emails do not match.";
-      errorElement.classList.add("alert");
-      form.appendChild(errorElement);
+      errorElement.setAttribute('id', 'alert');
+      errorElement.classList.add("alert_color");
+      errorElement.style.color = '#d14539';
+      emailConfirmField.parentNode.insertBefore(errorElement, emailConfirmField.nextSibling);
+      emailConfirmField.classList.add("alert_bg");
     }
-    emailConfirmField.style.backgroundColor = 'rgba(230, 169, 171, 0.5)';
-    emailConfirmField.style.color = '#d14539';
   }
 
   function hideError() {
-    const errorElement = form.querySelector('.alert');
+    const errorElement = document.getElementById('alert');
     if (errorElement) {
       errorElement.remove();
+      emailConfirmField.classList.remove("alert_bg");
     }
-    emailConfirmField.style.backgroundColor = '';
-    emailConfirmField.style.color = '';
   }
 }
 
-window.onload = emailValidation;
+window.onload = function() {
+  emailValidation();
+};
+
 
 
   
